@@ -5,7 +5,7 @@
 
 namespace botty {
 	configparser::configparser() {
-
+		m_config = new config;
 	}
 
 	configparser::~configparser() {
@@ -13,14 +13,14 @@ namespace botty {
 	}
 
 	void configparser::load() {
-		m_config = new config;
-
 		using boost::property_tree::ptree;
 		ptree pt;
 
 		boost::property_tree::json_parser::read_json("config.json", pt);
 
 		m_config->version = pt.get<std::string>("version");
+		m_config->ident = pt.get<std::string>("ident");
+		m_config->name = pt.get<std::string>("name");
 		
 	}
 
