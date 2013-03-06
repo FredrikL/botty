@@ -1,9 +1,25 @@
+#pragma once
+
+#include <string>
+
 namespace botty {
-	class config {
+
+	struct config {
+		std::string version;
+		std::string ident;
+		std::string name;
+
+
+	};
+
+	class configparser {
 	public:
-		config();
-		~config();
+		configparser();
+		~configparser();
 
+		const config getConfig();
 
+	private:
+		config* m_config;
 	}
 };
