@@ -1,15 +1,15 @@
 {
-	version: "botty 1.2.3",
-	ident: "botty",
-	name: "botty the bot",
-	
-	servers: [
+	"version": "botty 1.2.3",
+	"ident": "botty",
+	"name": "botty the bot",
+
+	"servers": [
 		{
-			nickname: "botty"
-			name: "local",
-			hostname: "localhost",
-			port: 6667,
-			channels: [ "#test", "#test2" ]
+			"nickname": "botty",
+			"name": "local",
+			"hostname": "localhost",
+			"port": 6667,
+			"channels": [ "#test", "#test2" ]
 		}
 	]
 }
