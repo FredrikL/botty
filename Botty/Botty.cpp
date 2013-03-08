@@ -7,20 +7,26 @@
 #include "config.h"
 
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+int mymain() {
 	botty::configparser parser;
 	parser.load();
 
 	auto config = parser.getConfig();
 
 	std::cout <<  config.version;
-	
 
-/*	botty::IBot* bot = new botty::Bot();
+	/*	botty::IBot* bot = new botty::Bot();
 
 	delete bot;
 	*/
+
+
 	return 0;
 }
 
+#if WIN32
+int _tmain(int argc, _TCHAR* argv[])
+{
+	return mymain();
+}
+#endif
