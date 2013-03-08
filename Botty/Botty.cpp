@@ -24,7 +24,7 @@ int mymain() {
 	return 0;
 }
 
-#if WIN32
+#if _WIN32
 int _tmain(int argc, _TCHAR* argv[])
 {
 	return mymain();
