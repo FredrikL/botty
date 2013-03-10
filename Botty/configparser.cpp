@@ -22,7 +22,7 @@ namespace botty {
 		m_config->ident = pt.get<std::string>("ident");
 		m_config->name = pt.get<std::string>("name");
 
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, pt.get_child("servers"))
+		for(auto &v: pt.get_child("servers"))
         {
 			auto tree = v.second;
 			server s;
@@ -31,10 +31,9 @@ namespace botty {
 			s.hostname = tree.get<std::string>("hostname");
 			s.port = tree.get<int>("port");
 
-			BOOST_FOREACH(boost::property_tree::ptree::value_type &vt, tree.get_child("channels")) {
+			for(auto &vt: tree.get_child("channels")) {
 				s.channels.push_back(vt.second.data());
 			}
-
 
 			m_config->servers.push_back(s);
         }
