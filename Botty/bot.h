@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include "connection.h"
+#include "config.h"
 
 namespace botty{
 	class IBot {
@@ -19,6 +20,9 @@ namespace botty{
 		void shutdown();
 
 	private:
+		config getConfig();
+
+		// vars
 		std::map<std::string, IConnection*> connections;
 	}; 
 };

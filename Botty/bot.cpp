@@ -14,13 +14,16 @@ namespace botty {
 		}
 	}
 
-	void Bot::start() {
+	config Bot::getConfig() {
 		botty::configparser parser;
 		parser.load();
 
-		auto config = parser.getConfig();
+		return parser.getConfig();
+	}
 
-		// for each server in config.servers create a connection
+	void Bot::start() {
+		auto config = getConfig();
+
 		for(auto server : config.servers) {
 			auto connection = new Connection(server.nickname, server.hostname, 
 				server.port, server.channels);

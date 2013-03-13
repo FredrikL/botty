@@ -1,11 +1,13 @@
 #include "connection.h"
 
 namespace botty {
-	Connection::Connection(std::string nickname, std::string hostname, int port, std::vector<std::string> channels) {
+	Connection::Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
+		nickname(nick), hostname(host), port(prt), channels(chan) {
 	
 	}
 
 	Connection::~Connection() {
+
 	}
 
 	void Connection::connect() {
