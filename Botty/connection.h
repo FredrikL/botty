@@ -11,4 +11,10 @@ namespace botty {
 		virtual const std::string getHostname() = 0;
 		virtual const int getPort() = 0;
 	};
+
+	class Connection : public IConnection {
+	public:
+		Connection();
+		~Connection();
+	};
 };
