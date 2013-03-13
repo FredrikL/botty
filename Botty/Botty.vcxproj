@@ -90,6 +90,7 @@
     <ClCompile Include="bot.cpp" />
     <ClCompile Include="Botty.cpp" />
     <ClCompile Include="configparser.cpp" />
+    <ClCompile Include="connection.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>

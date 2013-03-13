@@ -13,10 +13,12 @@ namespace botty{
 
 	class Bot : public IBot {
 	public:
+		Bot();
+		~Bot();
 		void start();
 		void shutdown();
 
 	private:
-		std::map<std::string, IConnection> connections;
+		std::map<std::string, IConnection*> connections;
 	}; 
 };

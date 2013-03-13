@@ -1,20 +1,20 @@
 #pragma once
 
-#include <iostream>
+#include <string>
+#include <vector>
 
 namespace botty {
 	class IConnection {
 	public:
 		virtual void connect() = 0;
 		virtual void disconnect() = 0;
-		virtual const std::string getName() = 0;
-		virtual const std::string getHostname() = 0;
-		virtual const int getPort() = 0;
 	};
 
 	class Connection : public IConnection {
 	public:
-		Connection();
+		Connection(std::string nickname, std::string hostname, int port, std::vector<std::string> channels);
 		~Connection();
+		void connect();
+		void disconnect();
 	};
 };
