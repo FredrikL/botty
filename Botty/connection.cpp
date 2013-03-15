@@ -1,4 +1,5 @@
 #include "connection.h"
+#include <boost\thread.hpp>
 
 namespace botty {
 	Connection::Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
