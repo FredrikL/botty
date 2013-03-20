@@ -15,10 +15,27 @@ namespace botty {
 	}
 
 	void Connection::connect() {
+		using boost::asio::ip::tcp;
+
 		service = new boost::asio::io_service;
+
+		tcp::resolver resolver(*service);
+		tcp::resolver::query query(hostname, std::to_string(port));
+		auto iterator = resolver.resolve(query);
+
+		socket = new tcp::socket(*service);
+
+		boost::asio::async_connect(*socket, iterator,
+			boost::bind(&Connection::on_connect, this, boost::asio::placeholders::error));
+
+		service_thread = new boost::thread(boost::bind(&boost::asio::io_service::run, *service));
 	}
 
 	void Connection::disconnect() {
 		service_thread->join();
+	}
+
+	void Connection::on_connect(const boost::system::error_code& error) {
+
 	}
 };

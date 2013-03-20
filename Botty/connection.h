@@ -20,6 +20,9 @@ namespace botty {
 		void disconnect();
 
 	private:
+		void on_connect(const boost::system::error_code& error);
+
+	private:
 		std::string nickname;
 		std::string hostname;
 		int port;
