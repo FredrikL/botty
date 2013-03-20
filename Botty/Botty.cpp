@@ -4,14 +4,33 @@
 #include "stdafx.h"
 #include <iostream>
 #include "bot.h"
+#include <boost/thread.hpp>
+
+void botthread() {
+	botty::IBot* bot = 0;
+	
+	try {
+		bot = new botty::Bot();
+	
+		bot->start();
+	} catch(boost::thread_interrupted&) {
+	}
+	
+	delete bot;
+}
 
 
 int mymain() {
-	botty::IBot* bot = new botty::Bot();
+	boost::thread t(botthread);
+	char input;
+
+	do {
+		std::cout << "press q to terminate" << std::endl;
+		input = std::cin.get();
+	} while(input != 'q');
 	
-	bot->start();
-	
-	delete bot;
+	t.interrupt();
+	t.join();
 
 	return 0;
 }
