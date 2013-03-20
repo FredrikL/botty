@@ -19,7 +19,6 @@ void botthread() {
 	delete bot;
 }
 
-
 int mymain() {
 	boost::thread t(botthread);
 	char input;
