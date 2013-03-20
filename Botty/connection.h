@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <boost/asio.hpp>
+#include <boost/thread.hpp>
 
 namespace botty {
 	class IConnection {
@@ -22,5 +24,9 @@ namespace botty {
 		std::string hostname;
 		int port;
 		std::vector<std::string> channels;
+
+		boost::asio::io_service* service;
+		boost::asio::ip::tcp::socket* socket;
+		boost::thread* service_thread;
 	};
 };
