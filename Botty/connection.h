@@ -21,6 +21,7 @@ namespace botty {
 
 	private:
 		void on_connect(const boost::system::error_code& error);
+		void on_close();
 
 	private:
 		std::string nickname;

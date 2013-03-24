@@ -28,14 +28,24 @@ namespace botty {
 		boost::asio::async_connect(*socket, iterator,
 			boost::bind(&Connection::on_connect, this, boost::asio::placeholders::error));
 
-		service_thread = new boost::thread(boost::bind(&boost::asio::io_service::run, *service));
+		service_thread = new boost::thread(boost::bind(&boost::asio::io_service::run, service));
 	}
 
 	void Connection::disconnect() {
+		service->post(boost::bind(&Connection::on_close, this));
+
 		service_thread->join();
 	}
 
 	void Connection::on_connect(const boost::system::error_code& error) {
+		if(!error) {
+			std::cout << "connected" << std::endl;
+		} else {
+			std::cout << "error: " << &boost::system::error_code::message << std::endl;
+		}
+	}
 
+	void Connection::on_close() {
+		socket->close();
 	}
 };

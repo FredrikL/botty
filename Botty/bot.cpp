@@ -31,6 +31,8 @@ namespace botty {
 			auto connection = new Connection(server.nickname, server.hostname, 
 				server.port, server.channels);
 			connections[server.name] = connection;
+			
+			connection->connect();
 		}
 	}
 
