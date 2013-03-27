@@ -4,6 +4,7 @@
 #include <vector>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
+#include <boost/array.hpp>
 
 namespace botty {
 	class IConnection {
@@ -21,6 +22,7 @@ namespace botty {
 
 	private:
 		void on_connect(const boost::system::error_code& error);
+		void on_read(const boost::system::error_code& error);
 		void on_close();
 
 	private:
@@ -32,5 +34,6 @@ namespace botty {
 		boost::asio::io_service* service;
 		boost::asio::ip::tcp::socket* socket;
 		boost::thread* service_thread;
+		boost::array<char, 1024> buffer;
 	};
 };
