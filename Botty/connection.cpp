@@ -40,16 +40,18 @@ namespace botty {
 	void Connection::on_connect(const boost::system::error_code& error) {
 		if(!error) {
 			std::cout << "connected" << std::endl;
-			boost::asio::async_read(socket, 
-				boost::asio::buffer(buffer),
-				boost::bind(&Connection::on_read, this, boost::asio::placeholders::error));
+
+			boost::asio::async_read_until(socket, 
+				buffer, '\n',
+				boost::bind(&Connection::on_read, this, 
+					boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
 
 		} else {
 			std::cout << "error: " <<  std::endl;
 		}
 	}
 
-	void Connection::on_read(const boost::system::error_code& error) {
+	void Connection::on_read(const boost::system::error_code& error, std::size_t bytes) {
 		if(!error) {
 			std::cout << "data" << std::endl;
 		} else {
