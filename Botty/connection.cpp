@@ -4,7 +4,8 @@
 
 namespace botty {
 	Connection::Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
-		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0) {
+		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0),
+		state(ConnectionState::DISCONNECTED) {
 	
 	}
 
@@ -28,6 +29,8 @@ namespace botty {
 		boost::asio::async_connect(*socket, iterator,
 			boost::bind(&Connection::on_connect, this, boost::asio::placeholders::error));
 
+		state = ConnectionState::CONNECTING;
+
 		service_thread = new boost::thread(boost::bind(&boost::asio::io_service::run, service));
 	}
 
@@ -40,6 +43,7 @@ namespace botty {
 	void Connection::on_connect(const boost::system::error_code& error) {
 		if(!error) {
 			std::cout << "connected" << std::endl;
+			state = ConnectionState::CONNECTED;
 
 			boost::asio::async_read_until(socket, 
 				buffer, '\n',

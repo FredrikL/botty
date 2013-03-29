@@ -7,6 +7,9 @@
 #include <boost/array.hpp>
 
 namespace botty {
+
+	enum class ConnectionState { DISCONNECTED , CONNECTING, CONNECTED };
+
 	class IConnection {
 	public:
 		virtual void connect() = 0;
@@ -30,6 +33,8 @@ namespace botty {
 		std::string hostname;
 		int port;
 		std::vector<std::string> channels;
+
+		ConnectionState state;
 
 		boost::asio::io_service* service;
 		boost::asio::ip::tcp::socket* socket;
