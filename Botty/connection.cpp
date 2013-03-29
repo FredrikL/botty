@@ -45,7 +45,7 @@ namespace botty {
 			std::cout << "connected" << std::endl;
 			state = ConnectionState::CONNECTED;
 
-			boost::asio::async_read_until(socket, 
+			boost::asio::async_read_until(*socket, 
 				buffer, '\n',
 				boost::bind(&Connection::on_read, this, 
 					boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
