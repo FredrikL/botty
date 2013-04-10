@@ -20,7 +20,7 @@ namespace botty{
 		void shutdown();
 
 	private:
-		config getConfig();
+		botty::configuration::config getConfig();
 
 		// vars
 		std::map<std::string, IConnection*> connections;

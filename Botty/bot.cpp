@@ -15,8 +15,8 @@ namespace botty {
 		}
 	}
 
-	config Bot::getConfig() {
-		botty::configparser parser;
+	botty::configuration::config Bot::getConfig() {
+		botty::configuration::configparser parser;
 		parser.load();
 
 		botty::log::info("config loaded");
