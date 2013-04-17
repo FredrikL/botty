@@ -34,8 +34,6 @@ namespace botty {
 		int port;
 		std::vector<std::string> channels;
 
-		ConnectionState state;
-
 		boost::asio::io_service* service;
 		boost::asio::ip::tcp::socket* socket;
 		boost::thread* service_thread;

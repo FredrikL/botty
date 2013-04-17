@@ -2,6 +2,7 @@
 #include "bot.h"
 #include "config.h"
 #include "log.h"
+#include "server.h"
 
 
 namespace botty {
@@ -10,7 +11,7 @@ namespace botty {
 	}
 
 	Bot::~Bot() {
-		for(auto pair : connections) {
+		for(auto pair : servers) {
 			delete pair.second;
 		}
 	}
@@ -27,17 +28,16 @@ namespace botty {
 	void Bot::start() {
 		auto config = getConfig();
 
-		for(auto server : config.servers) {
-			auto connection = new Connection(server.nickname, server.hostname, 
-				server.port, server.channels);
-			connections[server.name] = connection;
+		for(auto s : config.servers) {
+			auto srv =  new server(s.nickname, s.hostname, s.port, s.channels);
+			servers[s.name] = srv;
 			
-			connection->connect();
+			srv->connect();
 		}
 	}
 
 	void Bot::shutdown() {
-		for(auto pair : connections) {
+		for(auto pair : servers) {
 			pair.second->disconnect();
 		}
 	}

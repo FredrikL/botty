@@ -2,8 +2,9 @@
 
 #include <map>
 #include <string>
-#include "connection.h"
+//#include "connection.h"
 #include "config.h"
+#include "server.h"
 
 namespace botty{
 	class IBot {
@@ -23,6 +24,6 @@ namespace botty{
 		botty::configuration::config getConfig();
 
 		// vars
-		std::map<std::string, IConnection*> connections;
+		std::map<std::string, server*> servers;
 	}; 
 };
