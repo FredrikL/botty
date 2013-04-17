@@ -16,6 +16,7 @@ namespace botty {
 		virtual void connect() = 0;
 		virtual void disconnect() = 0;
 		boost::signal<void(std::string)> on_data;
+		boost::signal<void()> on_connected;
 
 	};
 

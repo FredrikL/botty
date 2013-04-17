@@ -9,6 +9,7 @@ namespace botty {
 		connection = new Connection(nickname, hostname, port, channels);
 
 		connection->on_data.connect(boost::bind(&server::on_data, this, _1));
+		connection->on_connected.connect(boost::bind(&server::on_connected, this));
 	}
 
 
@@ -31,5 +32,10 @@ namespace botty {
 
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
+	}
+
+	void server::on_connected() {
+		state = ConnectionState::CONNECTED;
+		std::cout << "connected" << std::endl;
 	}
 }

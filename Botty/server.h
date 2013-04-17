@@ -13,6 +13,7 @@ namespace botty {
 
 	private:
 		void on_data(std::string);
+		void on_connected();
 
 
 	private:

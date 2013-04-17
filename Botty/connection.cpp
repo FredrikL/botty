@@ -39,7 +39,7 @@ namespace botty {
 
 	void Connection::on_connect(const boost::system::error_code& error) {
 		if(!error) {
-			std::cout << "connected" << std::endl;
+			on_connected();
 
 			boost::asio::async_read_until(*socket, 
 				buffer, '\n',
