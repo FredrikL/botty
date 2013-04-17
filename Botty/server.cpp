@@ -1,10 +1,14 @@
+#include <boost/bind.hpp>
+#include "connection.h"
 #include "server.h"
 
 namespace botty {
 	server::server(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
-		nickname(nick), hostname(host), port(prt), channels(chan)
+		nickname(nick), hostname(host), port(prt), channels(chan), state(ConnectionState::DISCONNECTED)
 	{
 		connection = new Connection(nickname, hostname, port, channels);
+
+		connection->on_data.connect(boost::bind(&server::on_data, this, _1));
 	}
 
 
@@ -14,10 +18,18 @@ namespace botty {
 	}
 
 	void server::connect() {
+		state = ConnectionState::CONNECTING;
+		
 		connection->connect();
 	}
 
 	void server::disconnect() {
+		state = ConnectionState::DISCONNECTED;
+
 		connection->disconnect();
+	}
+
+	void server::on_data(std::string data) {
+		std::cout << data << std::endl;
 	}
 }

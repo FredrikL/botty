@@ -5,6 +5,7 @@
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <boost/array.hpp>
+#include <boost/signal.hpp>
 
 namespace botty {
 
@@ -14,6 +15,8 @@ namespace botty {
 	public:
 		virtual void connect() = 0;
 		virtual void disconnect() = 0;
+		boost::signal<void(std::string)> on_data;
+
 	};
 
 	class Connection : public IConnection {
@@ -21,7 +24,7 @@ namespace botty {
 		Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan);
 		~Connection();
 		void connect();
-		void disconnect();
+		void disconnect();		
 
 	private:
 		void on_connect(const boost::system::error_code& error);

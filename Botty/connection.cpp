@@ -59,7 +59,7 @@ namespace botty {
 			std::string msg(boost::asio::buffers_begin(bufs), boost::asio::buffers_begin(bufs) + bytes);
 			buffer.consume(bytes);
 
-			std::cout << msg << std::endl;
+			on_data(msg);
 
 		} else {
 

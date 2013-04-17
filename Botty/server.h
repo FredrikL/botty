@@ -12,12 +12,18 @@ namespace botty {
 		void disconnect();
 
 	private:
+		void on_data(std::string);
+
+
+	private:
 		IConnection* connection;
 
 		std::string nickname;
 		std::string hostname;
 		int port;
 		std::vector<std::string> channels;
+
+		ConnectionState state;
 
 	};
 };
