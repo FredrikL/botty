@@ -71,6 +71,7 @@ namespace botty {
 		socket->close();
 	}
 
+	// todo: send queue
 	void Connection::send(std::string msg) {
 		service->post(boost::bind(&Connection::do_send, this, msg));
 	}
