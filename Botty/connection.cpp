@@ -70,4 +70,22 @@ namespace botty {
 	void Connection::on_close() {
 		socket->close();
 	}
+
+	void Connection::send(std::string msg) {
+		service->post(boost::bind(&Connection::do_send, this, msg));
+	}
+
+	void Connection::do_send(std::string msg) {
+		boost::asio::async_write(*socket,
+			boost::asio::buffer(msg.c_str(), msg.size()),
+			boost::bind(&Connection::on_sent, this,
+				boost::asio::placeholders::error));
+
+	}
+
+	void Connection::on_sent(const boost::system::error_code& error) {
+		if(error) {
+			std::cout << "write error" <<std::endl;
+		}
+	}
 };

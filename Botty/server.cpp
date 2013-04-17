@@ -32,6 +32,8 @@ namespace botty {
 
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
+
+		connection->send("lol?!\n" );
 	}
 
 	void server::on_connected() {

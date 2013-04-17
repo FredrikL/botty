@@ -15,9 +15,9 @@ namespace botty {
 	public:
 		virtual void connect() = 0;
 		virtual void disconnect() = 0;
+		virtual void send(std::string) = 0;
 		boost::signal<void(std::string)> on_data;
 		boost::signal<void()> on_connected;
-
 	};
 
 	class Connection : public IConnection {
@@ -26,11 +26,14 @@ namespace botty {
 		~Connection();
 		void connect();
 		void disconnect();		
+		void send(std::string);
 
 	private:
 		void on_connect(const boost::system::error_code& error);
 		void on_read(const boost::system::error_code& error, std::size_t bytes);
 		void on_close();
+		void do_send(std::string);
+		void on_sent(const boost::system::error_code& error);
 
 	private:
 		std::string nickname;
