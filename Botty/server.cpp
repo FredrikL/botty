@@ -12,7 +12,6 @@ namespace botty {
 		connection->on_connected.connect(boost::bind(&server::on_connected, this));
 	}
 
-
 	server::~server()
 	{
 		delete connection;
@@ -33,11 +32,14 @@ namespace botty {
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
 
-		connection->send("lol?!\n" );
+//		connection->send("lol?!\n" );
 	}
 
 	void server::on_connected() {
 		state = ConnectionState::CONNECTED;
 		std::cout << "connected" << std::endl;
+		//todo: send 
+		connection->send("NICK " + nickname + "\r\n");
+		connection->send("USER "+nickname+" 0 * :botty the bot\r\n");
 	}
 }

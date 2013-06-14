@@ -37,15 +37,19 @@ namespace botty {
 		service_thread->join();
 	}
 
-	void Connection::on_connect(const boost::system::error_code& error) {
-		if(!error) {
-			on_connected();
-
-			boost::asio::async_read_until(*socket, 
+	void Connection::async_read_until() {
+		boost::asio::async_read_until(*socket, 
 				buffer, '\n',
 				boost::bind(&Connection::on_read, this, 
 					boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred));
 
+	}
+
+	void Connection::on_connect(const boost::system::error_code& error) {
+		if(!error) {
+			on_connected();
+
+			async_read_until();
 		} else {
 			std::cout << "error: " <<  std::endl;
 		}
@@ -58,8 +62,9 @@ namespace botty {
 			boost::asio::streambuf::const_buffers_type bufs = buffer.data();
 			std::string msg(boost::asio::buffers_begin(bufs), boost::asio::buffers_begin(bufs) + bytes);
 			buffer.consume(bytes);
-
 			on_data(msg);
+
+			async_read_until();
 
 		} else {
 

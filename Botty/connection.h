@@ -9,7 +9,7 @@
 
 namespace botty {
 
-	enum class ConnectionState { DISCONNECTED , CONNECTING, CONNECTED };
+	enum class ConnectionState { DISCONNECTED , CONNECTING, CONNECTED, AUTHED, ONLINE };
 
 	class IConnection {
 	public:
@@ -34,6 +34,7 @@ namespace botty {
 		void on_close();
 		void do_send(std::string);
 		void on_sent(const boost::system::error_code& error);
+		void async_read_until();
 
 	private:
 		std::string nickname;
