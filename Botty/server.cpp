@@ -37,8 +37,6 @@ namespace botty {
 
 	void server::on_connected() {
 		state = ConnectionState::CONNECTED;
-		std::cout << "connected" << std::endl;
-		//todo: send 
 		connection->send("NICK " + nickname + "\r\n");
 		connection->send("USER "+nickname+" 0 * :botty the bot\r\n");
 	}

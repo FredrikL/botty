@@ -57,8 +57,6 @@ namespace botty {
 
 	void Connection::on_read(const boost::system::error_code& error, std::size_t bytes) {
 		if(!error) {
-			std::cout << "data" << std::endl;
-			
 			boost::asio::streambuf::const_buffers_type bufs = buffer.data();
 			std::string msg(boost::asio::buffers_begin(bufs), boost::asio::buffers_begin(bufs) + bytes);
 			buffer.consume(bytes);
