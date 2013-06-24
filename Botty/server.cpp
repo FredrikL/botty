@@ -38,6 +38,7 @@ namespace botty {
 	void server::on_connected() {
 		state = ConnectionState::CONNECTED;
 		connection->send("NICK " + nickname + "\r\n");
-		connection->send("USER "+nickname+" 0 * :botty the bot\r\n");
+		connection->send("USER " + nickname + " 0 * :botty the bot\r\n");
+		state = ConnectionState::AUTHED;
 	}
 }

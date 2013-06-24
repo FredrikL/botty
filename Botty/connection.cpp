@@ -74,11 +74,12 @@ namespace botty {
 		socket->close();
 	}
 
-	// todo: send queue
 	void Connection::send(std::string msg) {
+		// TODO: Auto add \r\n to msg if not present ?
 		service->post(boost::bind(&Connection::do_send, this, msg));
 	}
 
+	// TODO: send queue
 	void Connection::do_send(std::string msg) {
 		boost::asio::async_write(*socket,
 			boost::asio::buffer(msg.c_str(), msg.size()),
