@@ -4,7 +4,6 @@
 #include <vector>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
-#include <boost/array.hpp>
 #include <boost/signal.hpp>
 
 namespace botty {

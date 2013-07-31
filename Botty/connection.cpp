@@ -4,9 +4,7 @@
 
 namespace botty {
 	Connection::Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
-		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0) {
-	
-	}
+		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0) { }
 
 	Connection::~Connection() {
 		delete service;
@@ -57,7 +55,7 @@ namespace botty {
 
 	void Connection::on_read(const boost::system::error_code& error, std::size_t bytes) {
 		if(!error) {
-			boost::asio::streambuf::const_buffers_type bufs = buffer.data();
+			auto bufs = buffer.data();
 			std::string msg(boost::asio::buffers_begin(bufs), boost::asio::buffers_begin(bufs) + bytes);
 			buffer.consume(bytes);
 			on_data(msg);
