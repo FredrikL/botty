@@ -3,7 +3,7 @@
 namespace botty {
 	std::string Engine::process_message(std::string msg) {
 
-		return nullptr;
+		return "";
 	}
 
 	message Engine::parse_msg(std::string msg) {

@@ -5,6 +5,7 @@
 namespace botty {
 	struct message {
 		std::string source;
+		int num_id;
 		std::string command;
 		std::string target;
 		std::string data;
@@ -12,6 +13,8 @@ namespace botty {
 
 	class Engine {
 	public:
+		Engine() {};
+		~Engine() {};
 		std::string process_message(std::string);
 
 	private:
