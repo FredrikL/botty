@@ -32,6 +32,8 @@ namespace botty {
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
 		auto response = engine.process_message(data);
+		if(response.length() > 0)
+			connection->send(response);
 	}
 
 	void server::on_connected() {
