@@ -34,6 +34,7 @@ namespace botty {
 		void do_send(std::string);
 		void on_sent(const boost::system::error_code& error);
 		void async_read_until();
+		bool endsWithCRLF(std::string const &);
 
 	private:
 		std::string nickname;

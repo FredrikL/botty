@@ -72,8 +72,19 @@ namespace botty {
 		socket->close();
 	}
 
+	bool Connection::endsWithCRLF(std::string const &msg) {
+		if(msg.length() >= 2) {
+			return (0 == msg.compare(msg.length() -2,2,"\r\n"));
+		}
+		else {
+			return false;
+		}	
+	}
+
 	void Connection::send(std::string msg) {
-		// TODO: Auto add \r\n to msg if not present ?
+		if(!endsWithCRLF(msg)) {
+			msg += "\r\n";
+		}
 		service->post(boost::bind(&Connection::do_send, this, msg));
 	}
 
