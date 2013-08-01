@@ -2,6 +2,11 @@
 
 namespace botty {
 	std::string Engine::process_message(std::string msg) {
+
 		return nullptr;
+	}
+
+	message Engine::parse_msg(std::string msg) {
+		return message();
 	}
 }; 

@@ -31,6 +31,7 @@ namespace botty {
 
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
+		auto response = engine.process_message(data);
 	}
 
 	void server::on_connected() {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "connection.h"
+#include "engine.h"
 
 namespace botty {
 	class server
@@ -25,6 +26,7 @@ namespace botty {
 		std::vector<std::string> channels;
 
 		ConnectionState state;
+		Engine engine;
 
 	};
 };
