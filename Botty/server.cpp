@@ -25,14 +25,12 @@ namespace botty {
 
 	void server::disconnect() {
 		state = ConnectionState::DISCONNECTED;
-
+		connection->send("QUIT bye bye!");
 		connection->disconnect();
 	}
 
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
-
-//		connection->send("lol?!\n" );
 	}
 
 	void server::on_connected() {
