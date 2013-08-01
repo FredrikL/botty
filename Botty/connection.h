@@ -5,6 +5,7 @@
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <boost/signal.hpp>
+#include <deque>
 
 namespace botty {
 
@@ -34,7 +35,8 @@ namespace botty {
 		void do_send(std::string);
 		void on_sent(const boost::system::error_code& error);
 		void async_read_until();
-		bool endsWithCRLF(std::string const &);
+		bool ends_with_crlf(std::string const &);
+		void process_outbox();
 
 	private:
 		std::string nickname;
@@ -46,5 +48,6 @@ namespace botty {
 		boost::asio::ip::tcp::socket* socket;
 		boost::thread* service_thread;
 		boost::asio::streambuf buffer;
+		std::deque<std::string> outbox;
 	};
 };

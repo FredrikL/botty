@@ -4,7 +4,7 @@
 
 namespace botty {
 	Connection::Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
-		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0) { }
+		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0), outbox() { }
 
 	Connection::~Connection() {
 		delete service;
@@ -72,7 +72,7 @@ namespace botty {
 		socket->close();
 	}
 
-	bool Connection::endsWithCRLF(std::string const &msg) {
+	bool Connection::ends_with_crlf(std::string const &msg) {
 		if(msg.length() >= 2) {
 			return (0 == msg.compare(msg.length() -2,2,"\r\n"));
 		}
@@ -82,24 +82,38 @@ namespace botty {
 	}
 
 	void Connection::send(std::string msg) {
-		if(!endsWithCRLF(msg)) {
+		if(!this->ends_with_crlf(msg)) {
 			msg += "\r\n";
 		}
 		service->post(boost::bind(&Connection::do_send, this, msg));
 	}
 
-	// TODO: send queue
 	void Connection::do_send(std::string msg) {
+		outbox.push_back(msg);
+		if(outbox.size() > 1) {
+			return;
+		}
+		this->process_outbox();
+	}
+
+	void Connection::process_outbox() {
+		const std::string msg = outbox[0];
+
 		boost::asio::async_write(*socket,
 			boost::asio::buffer(msg.c_str(), msg.size()),
 			boost::bind(&Connection::on_sent, this,
 				boost::asio::placeholders::error));
-
 	}
 
 	void Connection::on_sent(const boost::system::error_code& error) {
+		outbox.pop_front();
+
 		if(error) {
 			std::cout << "write error" <<std::endl;
+		}
+
+		if(!outbox.empty()) {
+			this->process_outbox();
 		}
 	}
 };
