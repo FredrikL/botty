@@ -3,8 +3,8 @@
 #include <boost/asio.hpp>
 
 namespace botty {
-	Connection::Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
-		nickname(nick), hostname(host), port(prt), channels(chan), service(0), socket(0), service_thread(0), outbox() { }
+	Connection::Connection(std::string nick, std::string host, int prt) :
+		nickname(nick), hostname(host), port(prt), service(0), socket(0), service_thread(0), outbox() { }
 
 	Connection::~Connection() {
 		delete service;

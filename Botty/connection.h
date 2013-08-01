@@ -22,7 +22,7 @@ namespace botty {
 
 	class Connection : public IConnection {
 	public:
-		Connection(std::string nick, std::string host, int prt, std::vector<std::string> chan);
+		Connection(std::string nick, std::string host, int prt);
 		~Connection();
 		void connect();
 		void disconnect();		
@@ -42,7 +42,6 @@ namespace botty {
 		std::string nickname;
 		std::string hostname;
 		int port;
-		std::vector<std::string> channels;
 
 		boost::asio::io_service* service;
 		boost::asio::ip::tcp::socket* socket;
