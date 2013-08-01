@@ -74,7 +74,7 @@ namespace botty {
 
 	bool Connection::ends_with_crlf(std::string const &msg) {
 		if(msg.length() >= 2) {
-			return (0 == msg.compare(msg.length() -2,2,"\r\n"));
+			return (msg.compare(msg.length() -2,2,"\r\n") == 0);
 		}
 		else {
 			return false;
