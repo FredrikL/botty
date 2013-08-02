@@ -16,8 +16,6 @@ namespace botty {
 		Engine() {};
 		~Engine() {};
 		std::string process_message(std::string);
-
-	private:
 		message parse_msg(std::string);
 	};
 };

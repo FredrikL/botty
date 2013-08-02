@@ -5,6 +5,7 @@ using namespace bandit;
 
 go_bandit([](){
 	describe("Engine",[](){
+
 		describe("PING/PONG", []() {
 			botty::Engine engine;
 
@@ -19,7 +20,37 @@ go_bandit([](){
 
 				AssertThat(result, Equals("PONG :some data"));
 			});
-		});		
+		});
+
+		describe("regular message", [](){
+			botty::Engine engine;
+			std::string msg(":source PRIVMSG botty :hai");
+
+			it("should set source correctly", [&]() {
+				auto result = engine.parse_msg(msg);
+
+				AssertThat(result.source, Equals(":source"));
+			});
+
+			it("should set command correctly", [&]() {
+				auto result = engine.parse_msg(msg);
+
+				AssertThat(result.command, Equals("PRIVMSG"));
+			});
+
+			it("should set target correctly", [&]() {
+				auto result = engine.parse_msg(msg);
+
+				AssertThat(result.target, Equals("botty"));
+			});
+
+			it("should set data correctly", [&]() {
+				auto result = engine.parse_msg(msg);
+
+				AssertThat(result.data, Equals(":hai"));
+			});
+		});
+
 		
 	});
 });
