@@ -5,6 +5,7 @@
 #include <iostream>
 #include "bot.h"
 #include <boost/thread.hpp>
+#include <bandit/bandit.h>
 
 void botthread() {
 	botty::IBot* bot = 0;
@@ -37,6 +38,10 @@ int mymain() {
 #if _WIN32
 int _tmain(int argc, _TCHAR* argv[])
 {
+#if TESTING
+	return bandit::run(argc, nullptr);
+#else
 	return mymain();
+#endif
 }
 #endif
