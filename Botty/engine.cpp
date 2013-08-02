@@ -17,6 +17,7 @@ namespace botty {
 		return "";
 	}
 
+	// TODO: replace with something fancy
 	bool is_number(const std::string& s)
 	{
 		std::locale loc;
