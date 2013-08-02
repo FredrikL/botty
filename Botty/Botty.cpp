@@ -5,7 +5,9 @@
 #include <iostream>
 #include "bot.h"
 #include <boost/thread.hpp>
+#if TESTING
 #include <bandit/bandit.h>
+#endif
 
 void botthread() {
 	botty::IBot* bot = 0;
