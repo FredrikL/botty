@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <boost/signal.hpp>
 
 namespace botty {
 	struct message {
@@ -17,5 +18,6 @@ namespace botty {
 		~Engine() {};
 		std::string process_message(std::string);
 		message parse_msg(std::string);
+		boost::signal<void()> on_authed;
 	};
 };

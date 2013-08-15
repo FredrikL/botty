@@ -1,6 +1,7 @@
 #include <boost/bind.hpp>
 #include "connection.h"
 #include "server.h"
+#include <boost/algorithm/string/join.hpp>
 
 namespace botty {
 	server::server(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
@@ -10,6 +11,7 @@ namespace botty {
 
 		connection->on_data.connect(boost::bind(&server::on_data, this, _1));
 		connection->on_connected.connect(boost::bind(&server::on_connected, this));
+		engine.on_authed.connect(boost::bind(&server::on_authed, this));
 	}
 
 	server::~server()
@@ -40,6 +42,11 @@ namespace botty {
 		state = ConnectionState::CONNECTED;
 		connection->send("NICK " + nickname);
 		connection->send("USER " + nickname + " 0 * :botty the bot");
+	}
+
+	void server::on_authed() {
 		state = ConnectionState::AUTHED;
+		auto chans = boost::algorithm::join(channels, ",");
+		connection->send("JOIN " + chans);
 	}
 }

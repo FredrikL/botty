@@ -15,7 +15,7 @@ namespace botty {
 	private:
 		void on_data(std::string);
 		void on_connected();
-
+		void on_authed();
 
 	private:
 		IConnection* connection;

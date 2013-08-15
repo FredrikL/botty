@@ -12,7 +12,11 @@ namespace botty {
 			return "PONG " + data;
 		}
 
-		auto troll = parse_msg(msg);
+		auto parsed_msg = parse_msg(msg);
+		if((parsed_msg.num_id == 422) ||
+			(parsed_msg.num_id == 376)) {
+			on_authed();
+		}
 
 		return "";
 	}
@@ -33,13 +37,15 @@ namespace botty {
 		message result;
 		result.source = parts[0];
 		if(is_number(parts[1])) {
+			result.num_id = atoi(parts[1].c_str());
 			result.command = parts[2];
 			result.target = parts[3];
 			result.data = parts[4];
 		} else {
 			result.command = parts[1];
 			result.target = parts[2];
-			result.data = parts[3];
+			if(parts.size() > 3)
+				result.data = parts[3];
 		}
 		return result;
 	}

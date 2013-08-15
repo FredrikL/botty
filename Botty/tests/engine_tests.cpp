@@ -22,7 +22,7 @@ go_bandit([](){
 			});
 		});
 
-		describe("regular message", [](){
+		describe("parse_msg", [](){
 			botty::Engine engine;
 			std::string msg(":source PRIVMSG botty :hai");
 
