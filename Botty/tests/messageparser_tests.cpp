@@ -32,6 +32,19 @@ go_bandit([](){
 
 				AssertThat(result.data, Equals(":hai"));
 			});
+
+			it("should set numeric value correctly", [&] {
+				auto result = parser.process_message(":penguin.omega.org.za 376 botty :End of message of the day.");
+
+				AssertThat(result.num_id, Equals(376));
+			});
+
+			it("should handle ping in an odd way", [&] {
+				auto result = parser.process_message("PING :lol");
+
+				AssertThat(result.source, Equals("PING"));
+				AssertThat(result.command, Equals(":lol"));
+			});
 		});
 
 		
