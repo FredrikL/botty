@@ -12,10 +12,10 @@ namespace botty {
 		std::string data;
 	};
 
-	class Engine {
+	class MessageParser {
 	public:
-		Engine() {};
-		~Engine() {};
+		MessageParser() {};
+		~MessageParser() {};
 		message process_message(std::string);
 	private:
 		message parse_msg(std::string);

@@ -1,11 +1,11 @@
-#include "engine.h"
+#include "messageparser.h"
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <locale>
 
 
 namespace botty {
-	message Engine::process_message(std::string msg) {
+	message MessageParser::process_message(std::string msg) {
 		auto parsed_msg = parse_msg(msg);
 
 		return parsed_msg;
@@ -20,7 +20,7 @@ namespace botty {
 		return !s.empty() && it == s.end();
 	}
 
-	message Engine::parse_msg(std::string msg) {
+	message MessageParser::parse_msg(std::string msg) {
 		std::vector<std::string> parts;
 		boost::split(parts, msg, boost::is_any_of(" "));
 
