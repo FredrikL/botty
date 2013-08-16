@@ -1,13 +1,8 @@
 #include "engine.h"
+#include "server.h"
 
 namespace botty {
-	Engine::Engine() {
-	}
-
-	Engine::~Engine() {
-	}
-
-	void Engine::respond_to_message(message msg) {
+	void Engine::respond_to_message(message msg, server *sender) {
 		
 	}
 };

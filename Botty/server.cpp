@@ -35,16 +35,14 @@ namespace botty {
 		std::cout << data << std::endl;
 		auto response = engine.process_message(data);
 		
-		if(response.source == "PING") { // handle ping/pong hack
+		if(response.source == "PING") {
 			connection->send("PONG " + response.command);
-		}
-
-		if((response.num_id == codes::ERR_NOMOTD) ||
+		} else if((response.num_id == codes::ERR_NOMOTD) ||
 			(response.num_id == codes::RPL_ENDOFMOTD)) {
 			on_authed();
+		} else {
+			on_message(response, this);
 		}
-
-		on_message(response);
 	}
 
 	void server::on_connected() {
@@ -57,5 +55,9 @@ namespace botty {
 		state = ConnectionState::AUTHED;
 		auto chans = boost::algorithm::join(channels, ",");
 		connection->send("JOIN " + chans);
+	}
+
+	void server::message_response(message response) {
+		
 	}
 }

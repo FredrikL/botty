@@ -12,7 +12,8 @@ namespace botty {
 		~server();
 		void connect();
 		void disconnect();
-		boost::signal<void(message)> on_message;
+		boost::signal<void(message, server*)> on_message;
+		void message_response(message);
 
 	private:
 		void on_data(std::string);

@@ -31,7 +31,7 @@ namespace botty {
 			
 			srv->connect();
 			
-			srv->on_message.connect(boost::bind(&Engine::respond_to_message, *engine, _1));
+			srv->on_message.connect(boost::bind(&Engine::respond_to_message, *engine, _1, _2));
 		}
 	}
 
