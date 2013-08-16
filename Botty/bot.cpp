@@ -1,7 +1,6 @@
 #include <iostream>
 #include "bot.h"
 #include "config.h"
-#include "log.h"
 #include "server.h"
 
 
@@ -20,8 +19,6 @@ namespace botty {
 		botty::configuration::configparser parser;
 		parser.load();
 
-		botty::log::info("config loaded");
-		
 		return parser.getConfig();
 	}
 
