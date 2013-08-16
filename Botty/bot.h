@@ -4,6 +4,7 @@
 #include <string>
 #include "config.h"
 #include "server.h"
+#include "engine.h"
 
 namespace botty{
 	class IBot {
@@ -22,6 +23,7 @@ namespace botty{
 	private:
 		botty::configuration::config getConfig();
 
-		std::map<std::string, std::shared_ptr<server>> servers;
+		std::shared_ptr<std::map<std::string, std::shared_ptr<server>>> servers;
+		std::unique_ptr<Engine> engine;
 	}; 
 };

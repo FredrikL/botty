@@ -2,6 +2,7 @@
 
 #include "connection.h"
 #include "messageparser.h"
+#include <boost/signal.hpp>
 
 namespace botty {
 	class server
@@ -11,6 +12,7 @@ namespace botty {
 		~server();
 		void connect();
 		void disconnect();
+		boost::signal<void(message)> on_message;
 
 	private:
 		void on_data(std::string);

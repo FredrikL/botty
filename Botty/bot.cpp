@@ -6,10 +6,13 @@
 namespace botty {
 
 	Bot::Bot() {
+		servers = std::shared_ptr<std::map<std::string, std::shared_ptr<server>>>(
+			new std::map<std::string, std::shared_ptr<server>>());
+		engine = std::unique_ptr<Engine>(new Engine());
 	}
 
 	Bot::~Bot() {
-		for(auto pair : servers) {
+		for(auto pair : *servers) {
 			pair.second.reset();
 		}
 	}
@@ -26,14 +29,16 @@ namespace botty {
 
 		for(auto s : config.servers) {
 			auto srv =  std::shared_ptr<server>(new server(s.nickname, s.hostname, s.port, s.channels));
-			servers[s.name] = srv;
+			(*servers)[s.name] = srv;
 			
 			srv->connect();
+			
+			srv->on_message.connect(boost::bind(&Engine::respond_to_message, *engine, _1));
 		}
 	}
 
 	void Bot::shutdown() {
-		for(auto pair : servers) {
+		for(auto pair : *servers) {
 			pair.second->disconnect();
 		}
 	}

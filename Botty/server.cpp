@@ -43,6 +43,8 @@ namespace botty {
 			(response.num_id == codes::RPL_ENDOFMOTD)) {
 			on_authed();
 		}
+
+		on_message(response);
 	}
 
 	void server::on_connected() {

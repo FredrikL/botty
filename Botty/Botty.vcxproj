@@ -209,6 +209,7 @@
     <ClInclude Include="bot.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="connection.h" />
+    <ClInclude Include="engine.h" />
     <ClInclude Include="messageparser.h" />
     <ClInclude Include="irc_codes.h" />
     <ClInclude Include="server.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Botty.cpp" />
     <ClCompile Include="configparser.cpp" />
     <ClCompile Include="connection.cpp" />
+    <ClCompile Include="engine.cpp" />
     <ClCompile Include="messageparser.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="stdafx.cpp" />
