@@ -5,7 +5,7 @@ using namespace bandit;
 
 go_bandit([](){
 	describe("MessageParser",[](){
-		describe("parse_msg", [](){
+		describe("process_message", [](){
 			botty::MessageParser parser;
 			std::string msg(":source PRIVMSG botty :hai");
 

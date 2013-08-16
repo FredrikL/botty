@@ -224,7 +224,7 @@
     <ClCompile Include="messageparser.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="tests\engine_tests.cpp" />
+    <ClCompile Include="tests\messageparser_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json">
