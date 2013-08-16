@@ -2,11 +2,12 @@
 #include "bot.h"
 #include "config.h"
 #include "server.h"
+#include "engine.h"
 
 namespace botty {
 
 	Bot::Bot() {
-		engine = std::unique_ptr<Engine>(new Engine());
+		_engine = std::unique_ptr<engine>(new engine());
 	}
 
 	Bot::~Bot() {
@@ -31,7 +32,7 @@ namespace botty {
 			
 			srv->connect();
 			
-			srv->on_message.connect(boost::bind(&Engine::respond_to_message, *engine, _1, _2));
+			srv->on_message.connect(boost::bind(&engine::respond_to_message, *_engine, _1, _2));
 		}
 	}
 

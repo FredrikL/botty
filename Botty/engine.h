@@ -4,11 +4,13 @@
 #include "server.h"
 
 namespace botty {
-	class Engine {
+	class engine {
 	public:
-		Engine() { };
-		~Engine() { };
+		engine() { };
+		~engine() { };
 		
 		void respond_to_message(message, server*);
+	private:
+		std::string get_nick(std::string);
 	};
 };

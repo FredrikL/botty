@@ -24,6 +24,6 @@ namespace botty{
 		botty::configuration::config getConfig();
 
 		std::map<std::string, std::shared_ptr<server>> servers;
-		std::unique_ptr<Engine> engine;
+		std::unique_ptr<engine> _engine;
 	}; 
 };

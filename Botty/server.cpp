@@ -58,6 +58,7 @@ namespace botty {
 	}
 
 	void server::message_response(message response) {
-		
+		auto msg = response.command + " " + response.target + " :" + response.data;
+		connection->send(msg);
 	}
 }
