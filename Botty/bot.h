@@ -2,7 +2,6 @@
 
 #include <map>
 #include <string>
-//#include "connection.h"
 #include "config.h"
 #include "server.h"
 
@@ -23,7 +22,6 @@ namespace botty{
 	private:
 		botty::configuration::config getConfig();
 
-		// vars
-		std::map<std::string, server*> servers;
+		std::map<std::string, std::shared_ptr<server>> servers;
 	}; 
 };

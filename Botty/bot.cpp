@@ -3,7 +3,6 @@
 #include "config.h"
 #include "server.h"
 
-
 namespace botty {
 
 	Bot::Bot() {
@@ -11,7 +10,7 @@ namespace botty {
 
 	Bot::~Bot() {
 		for(auto pair : servers) {
-			delete pair.second;
+			pair.second.reset();
 		}
 	}
 
@@ -26,7 +25,7 @@ namespace botty {
 		auto config = getConfig();
 
 		for(auto s : config.servers) {
-			auto srv =  new server(s.nickname, s.hostname, s.port, s.channels);
+			auto srv =  std::shared_ptr<server>(new server(s.nickname, s.hostname, s.port, s.channels));
 			servers[s.name] = srv;
 			
 			srv->connect();
