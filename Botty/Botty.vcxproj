@@ -210,6 +210,7 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="connection.h" />
     <ClInclude Include="engine.h" />
+    <ClInclude Include="irc_codes.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="stdafx.h" />

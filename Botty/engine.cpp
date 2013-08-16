@@ -2,6 +2,7 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <locale>
+#include "irc_codes.h"
 
 namespace botty {
 	std::string Engine::process_message(std::string msg) {
@@ -13,8 +14,8 @@ namespace botty {
 		}
 
 		auto parsed_msg = parse_msg(msg);
-		if((parsed_msg.num_id == 422) ||
-			(parsed_msg.num_id == 376)) {
+		if((parsed_msg.num_id == codes::ERR_NOMOTD) ||
+			(parsed_msg.num_id == codes::RPL_ENDOFMOTD)) {
 			on_authed();
 		}
 
