@@ -23,7 +23,7 @@ namespace botty{
 	private:
 		botty::configuration::config getConfig();
 
-		std::shared_ptr<std::map<std::string, std::shared_ptr<server>>> servers;
+		std::map<std::string, std::shared_ptr<server>> servers;
 		std::unique_ptr<Engine> engine;
 	}; 
 };
