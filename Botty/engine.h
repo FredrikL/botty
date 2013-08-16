@@ -16,8 +16,8 @@ namespace botty {
 	public:
 		Engine() {};
 		~Engine() {};
-		std::string process_message(std::string);
+		message process_message(std::string);
+	private:
 		message parse_msg(std::string);
-		boost::signal<void()> on_authed;
 	};
 };

@@ -2,6 +2,7 @@
 #include "connection.h"
 #include "server.h"
 #include <boost/algorithm/string/join.hpp>
+#include "irc_codes.h"
 
 namespace botty {
 	server::server(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
@@ -11,7 +12,6 @@ namespace botty {
 
 		connection->on_data.connect(boost::bind(&server::on_data, this, _1));
 		connection->on_connected.connect(boost::bind(&server::on_connected, this));
-		engine.on_authed.connect(boost::bind(&server::on_authed, this));
 	}
 
 	server::~server()
@@ -34,8 +34,15 @@ namespace botty {
 	void server::on_data(std::string data) {
 		std::cout << data << std::endl;
 		auto response = engine.process_message(data);
-		if(response.length() > 0)
-			connection->send(response);
+		
+		if(response.source == "PING") { // handle ping/pong hack
+			connection->send("PONG " + response.command);
+		}
+
+		if((response.num_id == codes::ERR_NOMOTD) ||
+			(response.num_id == codes::RPL_ENDOFMOTD)) {
+			on_authed();
+		}
 	}
 
 	void server::on_connected() {

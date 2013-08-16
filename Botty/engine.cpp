@@ -2,24 +2,13 @@
 #include <vector>
 #include <boost/algorithm/string.hpp>
 #include <locale>
-#include "irc_codes.h"
+
 
 namespace botty {
-	std::string Engine::process_message(std::string msg) {
-
-		if(msg.compare(0,4, "PING") == 0) {
-			auto loc = msg.find(" ") + 1;
-			auto data = msg.substr(loc, msg.length() - loc);
-			return "PONG " + data;
-		}
-
+	message Engine::process_message(std::string msg) {
 		auto parsed_msg = parse_msg(msg);
-		if((parsed_msg.num_id == codes::ERR_NOMOTD) ||
-			(parsed_msg.num_id == codes::RPL_ENDOFMOTD)) {
-			on_authed();
-		}
 
-		return "";
+		return parsed_msg;
 	}
 
 	// TODO: replace with something fancy
@@ -44,7 +33,8 @@ namespace botty {
 			result.data = parts[4];
 		} else {
 			result.command = parts[1];
-			result.target = parts[2];
+			if(parts.size() > 2)
+				result.target = parts[2];
 			if(parts.size() > 3)
 				result.data = parts[3];
 		}
