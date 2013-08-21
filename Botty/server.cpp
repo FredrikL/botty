@@ -61,4 +61,8 @@ namespace botty {
 		auto msg = response.command + " " + response.target + " :" + response.data;
 		connection->send(msg);
 	}
+
+	const std::string server::get_nickname() {
+		return nickname;
+	}
 }

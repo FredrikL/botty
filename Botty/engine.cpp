@@ -5,7 +5,8 @@
 
 namespace botty {
 	void engine::respond_to_message(message msg, server *sender) {
-		if(msg.command == "PRIVMSG" && msg.target == "botty") { // todo: read from server
+		if(msg.command == "PRIVMSG" &&
+			msg.target == sender->get_nickname()) { // todo: read from server
 			message resp;
 			resp.command = "PRIVMSG";
 			resp.target = get_nick(msg.source);

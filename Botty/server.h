@@ -14,6 +14,7 @@ namespace botty {
 		void disconnect();
 		boost::signal<void(message, server*)> on_message;
 		void message_response(message);
+		const std::string get_nickname();
 
 	private:
 		void on_data(std::string);
