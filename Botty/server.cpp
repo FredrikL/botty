@@ -8,7 +8,7 @@ namespace botty {
 	server::server(std::string nick, std::string host, int prt, std::vector<std::string> chan) :
 		nickname(nick), hostname(host), port(prt), channels(chan), state(ConnectionState::DISCONNECTED)
 	{
-		connection = new Connection(nickname, hostname, port);
+		connection = std::unique_ptr<IConnection>(new Connection(nickname, hostname, port));
 
 		connection->on_data.connect(boost::bind(&server::on_data, this, _1));
 		connection->on_connected.connect(boost::bind(&server::on_connected, this));
@@ -16,7 +16,7 @@ namespace botty {
 
 	server::~server()
 	{
-		delete connection;
+		connection.release();
 	}
 
 	void server::connect() {

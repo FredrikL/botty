@@ -22,7 +22,7 @@ namespace botty {
 		void on_authed();
 
 	private:
-		IConnection* connection;
+		std::unique_ptr<IConnection> connection;
 
 		std::string nickname;
 		std::string hostname;
